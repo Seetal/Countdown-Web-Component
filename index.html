@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <countdown-timer
+      class="timer"
+      id="timer-2"
+      time="5"
+      show-ring="true"
+      ring-width="5"
+      fluid-ring="true">
+        <p class="time-remaining" data-timer role="timer"></p>
+        <button class="button" data-start-btn>Start</button>
+    </countdown-timer>
+  </div>
+  <div class="container">
+    <countdown-timer
+      class="timer"
+      id="timer-1"
+      time="5"
+      show-ring="true"
+      ring-width="20">
+        <p class="time-remaining" data-timer role="timer"></p>
+    </countdown-timer>
+  </div>
+  <div class="container">
+    <countdown-timer
+      class="timer"
+      id="timer-3"
+      time="20"
+      auto-start="true">
+        <p class="time-remaining" data-timer role="timer"></p>
+    </countdown-timer>
+  </div>
+  <template data-countdown-ring>
+    <svg>
+      <circle class="circle" cx="50%" cy="50%"/>
+    </svg>
+  </template>
+  <script src="main.js" type="module"></script>
+</body>
+</html>
