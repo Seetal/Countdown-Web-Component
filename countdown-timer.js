@@ -14,6 +14,7 @@ class CountdownTimer extends HTMLElement {
       this.button.addEventListener('click', this.handleButtonTimer.bind(this));
     }
   };
+
   connectedCallback() {
     this.timerElement.textContent = this.time;
     if(this.showRing) {
@@ -23,6 +24,7 @@ class CountdownTimer extends HTMLElement {
       setTimeout(this.startTimer.bind(this), 10);
     }
   };
+
   setupRing() {
     const tmpl = document.querySelector('[data-countdown-ring]').content.cloneNode(true);
     const ringWidth = this.getAttribute('ring-width');
@@ -36,6 +38,8 @@ class CountdownTimer extends HTMLElement {
     this.circle = this.querySelector('.circle');
     this.circle.style.strokeDashoffset = `calc(${this.updatedTime} * (var(--circumference-as-percent) / ${this.time}))`;
   };
+
+  // When countdown finishes, a custom event will be dispatched.
   dispatchCompletedEvent() {
     const completeEvent = new CustomEvent('timer-complete', {
       bubbles: true,
@@ -43,9 +47,11 @@ class CountdownTimer extends HTMLElement {
     })
     this.dispatchEvent(completeEvent);
   };
+
   updateRing(time) {
     this.circle.style.strokeDashoffset = `calc(${time} * (var(--circumference-as-percent) / ${this.time}))`;
   };
+
   updateTimer() {
     this.updatedTime = this.updatedTime - 1;
     this.timerElement.textContent = this.updatedTime;
@@ -61,6 +67,7 @@ class CountdownTimer extends HTMLElement {
       }
     }
   };
+
   startTimer() {
     this.status = 'running';
     this.interval = setInterval(this.updateTimer.bind(this), 1000);
@@ -68,14 +75,15 @@ class CountdownTimer extends HTMLElement {
       this.updateRing(this.updatedTime - 1);
     }
   };
+
   resetRing() {
-    console.log('Resetting ring');
     this.circle.style.transition = 'none';
     this.updateRing(this.updatedTime);
     setTimeout(() => {
       this.circle.style.removeProperty('transition');
     }, 10);
   };
+  
   handleButtonTimer() {
     if(this.status === 'ready' || this.status === 'paused') {
       this.startTimer();
