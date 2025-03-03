@@ -35,7 +35,7 @@ If using the ring, add the following template to your page:
 When a timer finishes, a custom event is dispatched which contains the id of the timer.
 You can listen for this event with:
 
-```html
+```js
 document.addEventListener('timer-complete', (event) => {
   console.log(`Timer ${event.detail} finished`);
 })
